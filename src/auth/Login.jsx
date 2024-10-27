@@ -6,7 +6,6 @@ import Button from '../components/Button';
 
 const Login = () => {
     const [email, setEmail] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate(); // Initialize the navigate function
 
     // Load email from local storage on mount
@@ -14,7 +13,7 @@ const Login = () => {
         const savedEmail = localStorage.getItem('userEmail');
         if (savedEmail) {
             setEmail(savedEmail);
-            setIsLoggedIn(true);
+            
         }
     }, []);
 
@@ -25,35 +24,25 @@ const Login = () => {
     const handleLogin = () => {
         if (email) {
             localStorage.setItem('userEmail', email);
-            setIsLoggedIn(true);
-            navigate('/home'); // Navigate to the home page
+            navigate('/home'); 
         }
-    };
-
-    const handleLogout = () => {
-        localStorage.removeItem('userEmail');
-        setEmail("");
-        setIsLoggedIn(false);
     };
 
     return (
         <div className="flex justify-center items-center h-screen bg-slate-50">
             <div className="bg-cyan-200 rounded-lg w-[80%] sm:w-[50%] lg:w-[23%] text-center p-3">
                 <form className="flex flex-col" onSubmit={(e) => e.preventDefault()}>
-                    <Heading label={isLoggedIn ? 'Welcome Back!' : 'Login With Email'} />
+                    <Heading label={'Login With Email'} />
                     <TextBox 
                         label={'Email'} 
                         name={'email'} 
                         placeholder={'johndoe@example.com'} 
                         value={email} 
                         onChange={handleChange} 
-                        disabled={isLoggedIn} // Disable email input when logged in
+                        // disabled={isLoggedIn} // Disable email input when logged in
                     />
-                    {isLoggedIn ? (
-                        <Button label={'Log Out'} onClick={handleLogout} />
-                    ) : (
+                    
                         <Button label={'Log In'} onClick={handleLogin} />
-                    )}
                 </form>
             </div>  
         </div>
