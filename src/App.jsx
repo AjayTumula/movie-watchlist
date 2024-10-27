@@ -1,14 +1,16 @@
 
 import './App.css'
-import Sidebar from './Sidebar'
+import Sidebar from './components/Sidebar'
+import Home from './Home'
+
 
 
 function App() {
 
   return (
     <div>
-      Hi there
       <Sidebar />
+      <Home />
     </div>
   )
 }
